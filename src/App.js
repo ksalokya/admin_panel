@@ -8,14 +8,12 @@ import Drawer from "./components/drawer/Drawer"
 
 export default function App() {
 
-    const theme = React.useMemo(
-        () =>
+    const theme = React.useMemo(() =>
             createTheme({
                 palette: {
                     mode: 'dark'
                 }
-            }),
-    );
+           }),[]);
 
     return (
         <ThemeProvider theme={theme}>
