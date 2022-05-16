@@ -6,3 +6,16 @@
     background-color: #21D4FD;
     background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
 }
+
+.css-1fo8y4m{
+    position: absolute;
+    left: 50%;
+    margin-top: 40px;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 620px) {
+    .css-1fo8y4m {
+        width: 50% !important;
+    }
+}

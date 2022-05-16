@@ -98,7 +98,6 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 const Search = styled('div')(({theme}) => ({
-    position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.15),
     '&:hover': {
@@ -108,8 +107,8 @@ const Search = styled('div')(({theme}) => ({
     marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(35),
-        width: "600px",
+        marginLeft: theme.spacing(3),
+        width: 'auto',
     },
 }));
 
@@ -131,9 +130,12 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
+        [theme.breakpoints.up("sm")]: {
+            width: "50ch",
+            "&:focus": {
+                width: "55ch"
+            }
+        }
     },
 }));
 
@@ -163,14 +165,9 @@ export default function MiniDrawer() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
+    const handleDrawerOpenClose = () => {
+        setOpen(!open);
     };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
-
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -249,16 +246,15 @@ export default function MiniDrawer() {
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar position="fixed" className="back-color" open={open}>
+            <AppBar position="fixed" className="back-color">
                 <Toolbar>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={handleDrawerOpen}
+                        onClick={handleDrawerOpenClose}
                         edge="start"
                         sx={{
-                            marginRight: 5,
-                            ...(open && {display: 'none'}),
+                            marginRight: 5
                         }}
                     >
                         <MenuIcon/>
@@ -322,9 +318,11 @@ export default function MiniDrawer() {
                     </Box>
                 </Toolbar>
             </AppBar>
+            {renderMobileMenu}
+            {renderMenu}
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton>
                         {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                     </IconButton>
                 </DrawerHeader>
